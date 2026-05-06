@@ -1,0 +1,9 @@
+fastapi==0.123.9
+uvicorn==0.39.0
+pydantic==2.12.5
+requests==2.32.3
+Pillow==11.3.0
+pytesseract==0.3.13
+PyPDF2==3.0.1
+python-multipart==0.0.20
+python-dotenv==1.0.0
