@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
 dist
 dist-ssr
@@ -22,6 +23,26 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-*.zip
 
+# Large files
+*.zip
 *.pkl
+
+# Environment files (NEVER commit these)
+.env
+.env.production
+server/.env
+
+# Python virtual environment
+venv/
+predict/venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build artifacts
+dist/
+
+# Uploads folder (user data - do not commit)
+server/uploads/*
+!server/uploads/.gitkeep
