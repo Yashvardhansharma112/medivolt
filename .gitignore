@@ -46,3 +46,5 @@ dist/
 # Uploads folder (user data - do not commit)
 server/uploads/*
 !server/uploads/.gitkeep
+
+.vercel
