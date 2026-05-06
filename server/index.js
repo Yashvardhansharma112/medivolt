@@ -10,6 +10,7 @@ const crypto = require('crypto');
 
 // Import the database connection pool
 const pool = require('./db');
+const runMigrations = require('./migrate');
 
 // Load environment variables
 dotenv.config();
@@ -83,26 +84,8 @@ if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir);
 }
 
-const createPredictionsTable = `
-DROP TABLE IF EXISTS predictions;
-CREATE TABLE predictions (
-  id SERIAL PRIMARY KEY,
-  patient_id VARCHAR(100),
-  record_id INTEGER,
-  lab_id INTEGER,
-  final_score DECIMAL(5,2),
-  scores JSONB,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-CREATE INDEX idx_predictions_patient ON predictions(patient_id);
-CREATE INDEX idx_predictions_record ON predictions(record_id);
-`;
-pool.query(createPredictionsTable).then(() => {
-  console.log('Ensured predictions table exists');
-}).catch((err) => {
-  console.error('Failed to create predictions table:', err.stack || err);
-});
+// Run all DB migrations on startup (idempotent)
+runMigrations();
 // Helper function to generate patient ID
 const generatePatientId = (firstName) => {
   const timestamp = Date.now();
