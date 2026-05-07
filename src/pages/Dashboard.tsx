@@ -13,7 +13,7 @@ import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Too
 // if using types
 // import { MedicalRecord } from "../types/MedicalRecord"; // adjust path if needed
 import { Link } from 'react-router-dom';
-import { API_URL, SERVER_URL } from '@/lib/api';
+import { API_URL, SERVER_URL, PREDICT_URL } from '@/lib/api';
 
 const Dashboard = () => {
   const { toast } = useToast();
@@ -194,7 +194,7 @@ const analyzeReportForHealth = async (record: MedicalRecord) => {
     }
 
     // If no cached predictions, run the analysis
-    const apiUrl = `${SERVER_URL.replace(':5000', ':8000')}/analyze`;
+    const apiUrl = `${PREDICT_URL}/analyze`;
     const payload = { file_url: `${SERVER_URL}/uploads/${record.file_name}` };
 
     // Optional: set loading state for UI indicator
